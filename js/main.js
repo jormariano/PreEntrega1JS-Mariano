@@ -1,4 +1,4 @@
-// Calcular valor de un producto seleccionado con impuestos y descuentos
+// Calcular valor de productos seleccionados con envio.
 
 let user = "anaclara"
 let password = "Caballito26"
@@ -18,49 +18,49 @@ if (usuario == user) {
     alert("El usuario ingresado es incorrecto")
 }
 
-let precio_foto = prompt("Ingresar nombre de foto deseada");
+let price_product = prompt("Ingresar nombre de producto deseado");
 
-while(precio_foto != "ESC" ){
-   switch (precio_foto) {
-       case "foto1":
-            alert("La foto1 sale 20 dólares");
+while(price_product != "ESC" ){
+   switch (price_product) {
+       case "product1":
+            alert("El producto1 sale 20 dólares");
             break;
-        case "foto2":
-            alert("La foto2 sale 50 dólares");
+        case "product2":
+            alert("El producto2 sale 50 dólares");
             break;
-        case "foto3":
-            alert("La foto3 sale 20 dólares");
+        case "product3":
+            alert("El producto3 sale 20 dólares");
             break;
-        case "foto4":
-            alert("La foto4 sale 50 dólares");
+        case "product4":
+            alert("El producto4 sale 50 dólares");
             break;
-        case "foto5":
-            alert("La foto5 sale 40 dólares");
+        case "product5":
+            alert("El producto5 sale 40 dólares");
             break;
        default:
-           alert("No selecciono ninguna foto")
+           alert("No selecciono ningún producto")
            break;
    }
-   precio_foto = prompt("Ingresar nombre de foto deseada");
+   price_product = prompt("Ingresar nombre de producto deseada");
 }
 
-function precio_total(foto1, foto5) {
-    return foto1 + foto5;
+function total_price(product2, product5) {
+    return product2 + product5;
 }
 
-let fotos_seleccionadas = precio_total(30, 50);
+let select_product = total_price(50, 40);
 
-alert("El precio total de las fotos seleccionadas es de: " + fotos_seleccionadas + " dólares")
+alert("El precio total de los productos seleccionados es: " + select_product + " dólares")
 
-function precio_minimo(precio_total){
-    if (fotos_seleccionadas >= 150){
+function free_shipping(total_price){
+    if (select_product >= 150){
         console.log("El envío es gratis")
     } else {
         console.log("Deberas pagar el envío")
     }
 }
 
-function precio_envio(){
-    const Costo_Envio = 50
-    return Costo_Envio + fotos_seleccionadas;
+function shipping_price(){
+    const price_shipping = 50
+    return price_shipping + select_product;
 }
