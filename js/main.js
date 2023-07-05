@@ -1,16 +1,16 @@
 // Calcular valor de productos seleccionados con envio.
 
-let user = "anaclara"
-let password = "Caballito26"
+let user1 = "anaclara"
+let password1 = "Caballito26"
 
-let usuario = prompt("Ingrese su nombre de usuario");
+let user = prompt("Ingrese su nombre de usuario");
 
-if (usuario == user) {
+if (user == user1) {
 
-    let contrasenia = prompt("Ingrese su contraseña");
+    let password = prompt("Ingrese su contraseña");
 
-    if (contrasenia == password) {
-        alert("¡Bienvenida " + user + "!")
+    if (password == password1) {
+        alert("¡Bienvenida " + user1 + "!")
     } else {
         alert("La contraseña no es correcta")
     }
@@ -22,26 +22,26 @@ let price_product = prompt("Ingresar nombre de producto deseado");
 
 while(price_product != "ESC" ){
    switch (price_product) {
-       case "product1":
+       case "producto1":
             alert("El producto1 sale 20 dólares");
             break;
-        case "product2":
+        case "producto2":
             alert("El producto2 sale 50 dólares");
             break;
-        case "product3":
+        case "producto3":
             alert("El producto3 sale 20 dólares");
             break;
-        case "product4":
+        case "producto4":
             alert("El producto4 sale 50 dólares");
             break;
-        case "product5":
+        case "producto5":
             alert("El producto5 sale 40 dólares");
             break;
        default:
            alert("No selecciono ningún producto")
            break;
    }
-   price_product = prompt("Ingresar nombre de producto deseada");
+   price_product = prompt("Ingresar nombre de producto deseado");
 }
 
 function total_price(product2, product5) {
