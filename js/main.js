@@ -24,6 +24,8 @@ const products = [
 
 const shoppingCart = [];
 
+// Se muestran todos los productos al usuario
+
 function seeProducts() {
     const list = products.reduce((acc, element) => acc += `${element.id}- ${element.product}. Su valor es de ${element.price} usd. Con esta página podras: ${element.description} \n`, "");
 
@@ -37,12 +39,22 @@ function seeProducts() {
         e.preventDefault();
         const userChoice = parseInt(e.target.elements.choice.value);
         const productChoice = products.find(e => e.id === userChoice);
-        shoppingCart.push(productChoice);
-        askToKeepBuying(productChoice);
+        addToCartAndSave(productChoice);
     }
 }
 
-function askToKeepBuying(productChoice) {
+
+// Guardar en localStorage lo seleccionado por el usuario
+
+function addToCartAndSave(productChoice) {
+    shoppingCart.push(productChoice);
+    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+    askToKeepBuying(productChoice);
+}
+
+// El usuario puede elegir seguir comprando o no
+
+function askToKeepBuying(productChoice, productList) {
     const keepBuyingDiv = document.getElementById("keep-buying");
     keepBuyingDiv.style.display = "block";
 
@@ -51,7 +63,7 @@ function askToKeepBuying(productChoice) {
 
     keepBuyingYesButton.onclick = () => {
         keepBuyingDiv.style.display = "none";
-        seeProducts();
+        seeProducts()
     };
 
     keepBuyingNoButton.onclick = () => {
@@ -77,36 +89,10 @@ function askToKeepBuying(productChoice) {
     };
 }
 
-function showThanks(productChoice) {
-    const thanks = document.getElementById("thanks");
-    thanks.innerHTML = `
-        <h3>¡Muchas gracias por tu compra!</h3>
-        <p>Tu producto elegido es: ${productChoice.product}</p>
-        <button id="boton">Ver detalles</button>
-    `;
-
-    const btn = document.getElementById('boton');
-    btn.onclick = () => {
-        const detailsDiv = document.createElement("div");
-        detailsDiv.innerHTML = `
-            <h4>Detalles del producto:</h4>
-            <p>ID: ${productChoice.id}</p>
-            <p>Precio: ${productChoice.price} usd</p>
-            <p>${productChoice.descriptionSale}</p>
-        `;
-        document.body.append(detailsDiv);
-    };
-}
-
 seeProducts();
 
 // Acceso al DOM 30': document.getElementById('string'). El string es el id unico que le das a la etiqueta en el html.
 // document.getElementByClassName('string'). El string es la class reutilizable que le das a la etiqueta en el html.
 // document.getElementByTagName('div')
 // variable.innerHTML para agregar y modificar el HTML o variable.innerText
-
 // document.body.append(variable)   append es agregar
-
-// Clase Eventos 1h 23'
-
-// 3 Entrega: Incorporar DOM, Eventos, JSON y Storage. No usar alert() como salida y promt() como entrada, modificar el DOM para las salidas y capturar los eventos del usuario sobre inputs y botones para las entradas.
