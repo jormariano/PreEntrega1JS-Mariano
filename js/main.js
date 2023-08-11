@@ -24,7 +24,7 @@ const products = [
 
 const shoppingCart = [];
 
-// Se muestran todos los productos al usuario
+// Se muestran todos los productos al usuario y elige cual quiere
 
 function seeProducts() {
     const list = products.reduce((acc, element) => acc += `${element.id}- ${element.product}. Su valor es de ${element.price} usd. Con esta página podras: ${element.description} \n`, "");
@@ -39,10 +39,19 @@ function seeProducts() {
         e.preventDefault();
         const userChoice = parseInt(e.target.elements.choice.value);
         const productChoice = products.find(e => e.id === userChoice);
+
+        const nameUser = e.target.elements.name.value;
+        const surnameUser = e.target.elements.surname.value;
+        const emailUser = e.target.elements.email.value;
+
+        // Operador ternario para verificar los campos completados por el usuario
+        nameUser !== '' ? console.log('Es válido') : console.log('No es válido');
+        surnameUser !== '' ? console.log('Es válido') : console.log('No es válido');
+        emailUser !== '' ? console.log('Es válido') : console.log('No es válido');
+
         addToCartAndSave(productChoice);
     }
 }
-
 
 // Guardar en localStorage lo seleccionado por el usuario
 
@@ -96,3 +105,8 @@ seeProducts();
 // document.getElementByTagName('div')
 // variable.innerHTML para agregar y modificar el HTML o variable.innerText
 // document.body.append(variable)   append es agregar
+
+// Operador ternario if es ? else es :
+// Ej:  datos.nombre !=== '' ? console.log('es valido') : console.log('no es valido'); Se puede utilizar con function
+
+// Clase Librerias 29'
