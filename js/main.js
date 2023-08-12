@@ -63,18 +63,26 @@ const shoppingCart = [];
 // Se muestran los productos al usuario y elige cual quiere
 
 function seeProducts() {
-    const list = products.reduce((acc, element) => acc += `${element.id}- ${element.product}. Su valor es de ${element.price} usd. Con esta página podras: ${element.description} \n`, "");
 
     const productList = document.getElementById("product-list");
     const h2 = document.createElement("h2");
     h2.textContent = "Productos disponibles:";
 
-    const productListText = document.createElement("p");
-    productListText.textContent = list;
+    const productListUL = document.createElement("ul");
+
+    products.forEach((element) => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `
+            <span class="product-id">${element.id}- ${element.product}</span><br>
+            Su valor es de ${element.price} USD.<br> 
+            <strong>Con esta página podrás:</strong><br> 
+            ${element.description}
+        `;
+        productListUL.appendChild(listItem);
+    });
 
     productList.appendChild(h2);
-    productList.appendChild(productListText);
-
+    productList.appendChild(productListUL);
 
     const formUser = document.getElementById("form");
     formUser.addEventListener("submit", valueForm);
@@ -156,5 +164,4 @@ seeProducts();
 // document.body.append(variable)   append es agregar
 
 // Clase Librerias: SweetAlert 29'; Toastify 1h 12' (agregar al proyecto); Luxon 1h 22'
-
-// AfterClass 14'
+// AfterClass 1h 11'

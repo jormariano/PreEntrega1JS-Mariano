@@ -43,18 +43,32 @@ header h1 {
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 5px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.container h2 {
-    font-size: 25px;
+.product-list h2 {
+    font-size: 22px;
 }
 
-.product-list {
-    margin-top: 20px;
+.product-list ul {
+    margin: 0px;
+    padding: 0px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.product-list li {
+    margin: 10px;
+}
+
+.product-id {
+    font-weight: bold;
+    font-size: 18px;
 }
 
 /* Formulario de compra */
