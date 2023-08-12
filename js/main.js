@@ -1,3 +1,37 @@
+// Barra de navegacion dinamica. 
+
+const navBar = [
+    {
+        label: 'Inicio',
+        src: './assets/home.svg',
+    },
+    {
+        label: 'Experiencia',
+        src: './assets/profile.svg',
+    },
+    {
+        label: 'Productos',
+        src: './assets/eye.svg',
+    },
+    {
+        label: 'Busqueda',
+        src: './assets/search.svg',
+    }
+]
+
+const nav = document.getElementById('navBar');
+
+navBar.forEach((element) => {
+    const btnNav = document.createElement('button');
+    btnNav.textContent = element.label;
+    btnNav.className = 'btn';
+    const img = document.createElement('img');
+    img.src = element.src;
+    img.className = 'btn-icon';
+    btnNav.appendChild(img);
+    nav.appendChild(btnNav);
+})
+
 const products = [
     {
         id: 1,
@@ -44,10 +78,14 @@ function seeProducts() {
         const surnameUser = e.target.elements.surname.value;
         const emailUser = e.target.elements.email.value;
 
+        const nameMessage = document.getElementById("nameMessage");
+        const surnameMessage = document.getElementById("surnameMessage");
+        const emailMessage = document.getElementById("emailMessage");
+
         // Operador ternario para verificar los campos completados por el usuario
-        nameUser !== '' ? console.log('Es válido') : console.log('No es válido');
-        surnameUser !== '' ? console.log('Es válido') : console.log('No es válido');
-        emailUser !== '' ? console.log('Es válido') : console.log('No es válido');
+        nameUser !== '' ? nameMessage.textContent = 'Nombre es válido' : nameMessage.textContent = 'Nombre esta vacio';
+        surnameUser !== '' ? surnameMessage.textContent = 'Apellido es válido' : surnameMessage.textContent = 'Apellido esta vacio';
+        emailUser !== '' ? emailMessage.textContent = 'Email es válido' : emailMessage.textContent = 'Email esta vacio';
 
         addToCartAndSave(productChoice);
     }
@@ -78,6 +116,7 @@ function askToKeepBuying(productChoice, productList) {
     keepBuyingNoButton.onclick = () => {
         keepBuyingDiv.style.display = "none";
         const thanks = document.getElementById("thanks");
+
         thanks.innerHTML = `
             <h3>¡Muchas gracias por tu compra!</h3>
             <p>Tu producto elegido es: ${productChoice.product}</p>
@@ -106,7 +145,6 @@ seeProducts();
 // variable.innerHTML para agregar y modificar el HTML o variable.innerText
 // document.body.append(variable)   append es agregar
 
-// Operador ternario if es ? else es :
-// Ej:  datos.nombre !=== '' ? console.log('es valido') : console.log('no es valido'); Se puede utilizar con function
+// Clase Librerias: SweetAlert 29'; Toastify 1h 12' (agregar al proyecto); Luxon 1h 22'
 
-// Clase Librerias 29'
+// AfterClass 14'

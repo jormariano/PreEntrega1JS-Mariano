@@ -5,6 +5,29 @@ body {
     background-color: #f2f2f2;
 }
 
+header nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+header h1 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+}
+
+.btn-icon {
+    height: 15px;
+    width: 15px;
+    margin: 8px;
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -12,6 +35,10 @@ body {
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+    font-size: 25px;
 }
 
 .product-list {
