@@ -1,4 +1,4 @@
-// Barra de navegacion dinamica. 
+// Barra de navegacion dinamica
 
 const navBar = [
     {
@@ -32,6 +32,8 @@ navBar.forEach((element) => {
     nav.appendChild(btnNav);
 })
 
+// Creacion de productos
+
 const products = [
     {
         id: 1,
@@ -58,13 +60,21 @@ const products = [
 
 const shoppingCart = [];
 
-// Se muestran todos los productos al usuario y elige cual quiere
+// Se muestran los productos al usuario y elige cual quiere
 
 function seeProducts() {
     const list = products.reduce((acc, element) => acc += `${element.id}- ${element.product}. Su valor es de ${element.price} usd. Con esta página podras: ${element.description} \n`, "");
 
     const productList = document.getElementById("product-list");
-    productList.innerHTML = list;
+    const h2 = document.createElement("h2");
+    h2.textContent = "Productos disponibles:";
+
+    const productListText = document.createElement("p");
+    productListText.textContent = list;
+
+    productList.appendChild(h2);
+    productList.appendChild(productListText);
+
 
     const formUser = document.getElementById("form");
     formUser.addEventListener("submit", valueForm);

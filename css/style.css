@@ -1,13 +1,22 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reseteo */
+
+* {
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
+    box-sizing: border-box;
 }
+
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Barra de navegacion */
 
 header nav {
     display: flex;
     justify-content: space-around;
+    margin: 10px;
 }
 
 header h1 {
@@ -20,6 +29,7 @@ header h1 {
     justify-content: center;
     align-items: center;
     border: 0;
+    font-size: 20px;
 }
 
 .btn-icon {
@@ -27,6 +37,8 @@ header h1 {
     width: 15px;
     margin: 8px;
 }
+
+/* Productos disponibles */
 
 .container {
     max-width: 800px;
@@ -44,6 +56,8 @@ header h1 {
 .product-list {
     margin-top: 20px;
 }
+
+/* Formulario de compra */
 
 .form {
     margin-top: 20px;
