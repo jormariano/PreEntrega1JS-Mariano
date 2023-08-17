@@ -16,6 +16,10 @@ const navBar = [
     {
         label: 'Busqueda',
         src: './assets/search.svg',
+    },
+    {
+        label: 'Carrito',
+        src: './assets/cart.svg',
     }
 ]
 
@@ -60,6 +64,17 @@ const products = [
 
 const shoppingCart = [];
 
+// Se solicitan datos al backend y se simula una demora de 3 segundos
+
+const askProducts = () => {
+
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(products);
+        }, 2000);
+    });
+}
+
 // Se muestran los productos al usuario y elige cual quiere
 
 function seeProducts() {
@@ -70,19 +85,28 @@ function seeProducts() {
 
     const productListUL = document.createElement("ul");
 
-    products.forEach((element) => {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `
+    askProducts()
+        .then((products) => {
+
+            products.forEach((element) => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
             <span class="product-id">${element.id}- ${element.product}</span><br>
             Su valor es de ${element.price} USD.<br> 
             <strong>Con esta página podrás:</strong><br> 
             ${element.description}
         `;
-        productListUL.appendChild(listItem);
-    });
+                productListUL.appendChild(listItem);
+            });
 
-    productList.appendChild(h2);
-    productList.appendChild(productListUL);
+            productList.appendChild(h2);
+            productList.appendChild(productListUL);
+        })
+        .catch((e) => {
+            console.log("Hubo un error, vuelva a cargar la pagina")
+        })
+
+    // Formulario agregarlo segun la clase de Eventos en 1h 31'
 
     const formUser = document.getElementById("form");
     formUser.addEventListener("submit", valueForm);
@@ -101,9 +125,9 @@ function seeProducts() {
         const emailMessage = document.getElementById("emailMessage");
 
         // Operador ternario para verificar los campos completados por el usuario
-        nameUser !== '' ? nameMessage.textContent = 'Nombre es válido' : nameMessage.textContent = 'Nombre esta vacio';
-        surnameUser !== '' ? surnameMessage.textContent = 'Apellido es válido' : surnameMessage.textContent = 'Apellido esta vacio';
-        emailUser !== '' ? emailMessage.textContent = 'Email es válido' : emailMessage.textContent = 'Email esta vacio';
+        nameUser !== '' ? nameMessage.textContent = 'Nombre es válido' : nameMessage.textContent = 'Nombre esta vacío';
+        surnameUser !== '' ? surnameMessage.textContent = 'Apellido es válido' : surnameMessage.textContent = 'Apellido esta vacío';
+        emailUser !== '' ? emailMessage.textContent = 'Email es válido' : emailMessage.textContent = 'Email esta vacío';
 
         addToCartAndSave(productChoice);
     }
@@ -157,11 +181,6 @@ function askToKeepBuying(productChoice, productList) {
 
 seeProducts();
 
-// Acceso al DOM 30': document.getElementById('string'). El string es el id unico que le das a la etiqueta en el html.
-// document.getElementByClassName('string'). El string es la class reutilizable que le das a la etiqueta en el html.
-// document.getElementByTagName('div')
-// variable.innerHTML para agregar y modificar el HTML o variable.innerText
-// document.body.append(variable)   append es agregar
-
+// Simular carrito de compra hasta que el usuario ingrese datos de su tarjeta de credito
 // Clase Librerias: SweetAlert 29'; Toastify 1h 12' (agregar al proyecto); Luxon 1h 22'
-// AfterClass 1h 11'
+// Clase Asincronia y Promesas: 1h 46'
