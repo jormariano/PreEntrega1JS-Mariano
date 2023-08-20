@@ -4,10 +4,12 @@ const navBar = [
     {
         label: 'Inicio',
         src: './assets/home.svg',
+        url: './index.html'
     },
     {
         label: 'Experiencia',
         src: './assets/profile.svg',
+        url: './experiencia.html'
     },
     {
         label: 'Productos',
@@ -20,6 +22,7 @@ const navBar = [
     {
         label: 'Carrito',
         src: './assets/cart.svg',
+        url: './carrito.html'
     }
 ]
 
@@ -33,8 +36,13 @@ navBar.forEach((element) => {
     img.src = element.src;
     img.className = 'btn-icon';
     btnNav.appendChild(img);
+
+    btnNav.addEventListener('click', () => {
+        window.location.href = element.url;
+    });
+
     nav.appendChild(btnNav);
-})
+});
 
 // Creacion de productos
 
@@ -184,15 +192,21 @@ seeProducts();
 // Comentarios de clientes:
 
 async function comments() {
-    
-    try {
 
-       const tittle = document.createElement('h3');
+    try {
+        
+        const contenedor = document.getElementById("commentsCard")
+        commentsCard.className = 'comments-card';
+
+        const tittle = document.createElement('h3');
         tittle.className = 'card-tittle';
 
         tittle.innerHTML = `<h3>Comentarios de clientes: </h3>`
 
-        document.body.appendChild(tittle);
+        contenedor.appendChild(tittle);
+
+        const div = document.createElement('div');
+        div.className = 'card';
 
         for (let i = 1; i <= 6; i++) {
 
@@ -202,28 +216,28 @@ async function comments() {
 
             console.log(parsedCustomerFeedback);
 
-            const div = document.createElement('div');
-            div.className = 'card';
 
             const innerDiv = document.createElement('div');
             innerDiv.className = 'card-body';
 
-            innerDiv.innerHTML = `<h3>${parsedCustomerFeedback.name}</h3>
+            innerDiv.innerHTML = `<h4>${parsedCustomerFeedback.name}</h4>
                                   <p>Comentario: ${parsedCustomerFeedback.body} </p>`
 
-            div.appendChild(innerDiv);
-            document.body.appendChild(div);
-        }
 
+            div.appendChild(innerDiv);
+        }
+        contenedor.appendChild(div);
     } catch (e) {
         console.log('Error, vuelva a cargar la pagina', e);
     }
 }comments();
 
-const footerCopy = document.getElementById('footer')
+const footerCopy = document.getElementById('footer');
+footerCopy.className = 'footer';
+
 footerCopy.innerHTML = `<p>© 2023 JotaMariano</p>`
 
 
 // Simular carrito de compra hasta que el usuario ingrese datos de su tarjeta de credito
-// Clase Librerias: SweetAlert 29'; Toastify 1h 12' (agregar al proyecto); Luxon 1h 22'
+// Clase Librerias: Toastify 1h 12' (agregar para notificar que anadio un producto al carrito)
 // Agregar Readme

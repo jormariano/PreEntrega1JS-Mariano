@@ -96,14 +96,29 @@ header h1 {
 
 /* Comentarios de clientes */
 
-.card {
+.comments-card {
     display: flex;
     flex-direction: column;
-    width: 150px;
     justify-content: center;
     align-items: center;
+}
+
+.card-tittle h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    width: 1200px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     text-transform: capitalize;
-    margin: 25px 10px;
+    margin: 10px 10px;
     border: 2px solid grey;
     box-shadow: -1px 6px 24px 2px rgba(0, 0, 0, 0.75);
     border-radius: 5px;
@@ -111,10 +126,18 @@ header h1 {
 
   .card-body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    height: 260px;
+    width: 300px;
+    margin: 10px;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
   }
   
-  .card-body h3 {
+  .card-body h4 {
     display: flex;
     gap: 5px;
   }
@@ -122,4 +145,12 @@ header h1 {
   .card-body p {
     display: flex;
     gap: 5px;
+  }
+
+  .footer {
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    justify-content: end;
+    margin: 10px 20px;
   }
