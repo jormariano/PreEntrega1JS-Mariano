@@ -64,7 +64,7 @@ const products = [
 
 const shoppingCart = [];
 
-// Se solicitan datos al backend y se simula una demora de 3 segundos
+// Se solicitan los productos al backend y se simula una demora de 2 segundos
 
 const askProducts = () => {
 
@@ -106,7 +106,7 @@ function seeProducts() {
             console.log("Hubo un error, vuelva a cargar la pagina")
         })
 
-    // Formulario agregarlo segun la clase de Eventos en 1h 31'
+    // Formulario hacerlo segun la clase de Eventos en 1h 31'
 
     const formUser = document.getElementById("form");
     formUser.addEventListener("submit", valueForm);
@@ -181,6 +181,49 @@ function askToKeepBuying(productChoice, productList) {
 
 seeProducts();
 
+// Comentarios de clientes:
+
+async function comments() {
+    
+    try {
+
+       const tittle = document.createElement('h3');
+        tittle.className = 'card-tittle';
+
+        tittle.innerHTML = `<h3>Comentarios de clientes: </h3>`
+
+        document.body.appendChild(tittle);
+
+        for (let i = 1; i <= 6; i++) {
+
+            const customerFeedback = await fetch(`https://jsonplaceholder.typicode.com/comments/${i}`);
+
+            const parsedCustomerFeedback = await customerFeedback.json();
+
+            console.log(parsedCustomerFeedback);
+
+            const div = document.createElement('div');
+            div.className = 'card';
+
+            const innerDiv = document.createElement('div');
+            innerDiv.className = 'card-body';
+
+            innerDiv.innerHTML = `<h3>${parsedCustomerFeedback.name}</h3>
+                                  <p>Comentario: ${parsedCustomerFeedback.body} </p>`
+
+            div.appendChild(innerDiv);
+            document.body.appendChild(div);
+        }
+
+    } catch (e) {
+        console.log('Error, vuelva a cargar la pagina', e);
+    }
+}comments();
+
+const footerCopy = document.getElementById('footer')
+footerCopy.innerHTML = `<p>© 2023 JotaMariano</p>`
+
+
 // Simular carrito de compra hasta que el usuario ingrese datos de su tarjeta de credito
 // Clase Librerias: SweetAlert 29'; Toastify 1h 12' (agregar al proyecto); Luxon 1h 22'
-// Clase Asincronia y Promesas: 1h 46'
+// Agregar Readme
