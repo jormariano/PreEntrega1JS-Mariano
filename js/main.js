@@ -16,10 +16,6 @@ const navBar = [
         src: './assets/eye.svg',
     },
     {
-        label: 'Busqueda',
-        src: './assets/search.svg',
-    },
-    {
         label: 'Carrito',
         src: './assets/cart.svg',
         url: './carrito.html'
@@ -38,7 +34,11 @@ navBar.forEach((element) => {
     btnNav.appendChild(img);
 
     btnNav.addEventListener('click', () => {
-        window.location.href = element.url;
+        if (element.url) {
+            window.location.href = element.url
+        } else {
+            console.log('Página en construcción') 
+        }
     });
 
     nav.appendChild(btnNav);
@@ -51,21 +51,24 @@ const products = [
         id: 1,
         product: "Ecommerce",
         price: 500,
-        description: "Tener tu propio Ecommerce para vender todos lo productos que quieras de forma online e impulsa tu negocio",
+        img: './assets/Ecommerce.png',
+        description: "Adquirir un Ecommerce para vender tus productos de forma online e impulsar tu negocio",
         descriptionSale: "¡Felicitaciones! Accediste a Ecommerce para vender tus productos online e impulsar tu negocio"
     },
     {
         id: 2,
         product: "Página Web Personal",
         price: 300,
-        description: "Adquirir tu página web personalizada para posicionar tu marca personal en internet y redes sociales",
+        img: './assets/PaginaWebPersonal.png',
+        description: "Adquirir tu Página web personalizada para posicionar tu marca personal en internet y redes sociales",
         descriptionSale: "¡Felicitaciones! Accediste a Página Web Personal para posicionar tu marca personal"
     },
     {
         id: 3,
         product: "Página Web Estudio",
         price: 400,
-        description: "Adquirir una página web personalizada para tu estudio, así lograras que más clientes te encuentren",
+        img: './assets/PaginaWebEstudio.png',
+        description: "Adquirir tu Página web personalizada para tu estudio y así lograras que más clientes te encuentren",
         descriptionSale: "¡Felicitaciones! Accediste a Página Web Estudio para lograr que más clientes te encuentren"
     }
 ]
@@ -87,9 +90,7 @@ const askProducts = () => {
 
 function seeProducts() {
 
-    const productList = document.getElementById("product-list");
-    const h2 = document.createElement("h2");
-    h2.textContent = "Productos disponibles:";
+    const productList = document.getElementById("productList");
 
     const productListUL = document.createElement("ul");
 
@@ -97,48 +98,58 @@ function seeProducts() {
         .then((products) => {
 
             products.forEach((element) => {
-                const listItem = document.createElement("li");
-                listItem.innerHTML = `
-            <span class="product-id">${element.id}- ${element.product}</span><br>
-            Su valor es de ${element.price} USD.<br> 
-            <strong>Con esta página podrás:</strong><br> 
-            ${element.description}
-        `;
-                productListUL.appendChild(listItem);
+                const listItem2 = document.createElement("li");
+                listItem2.innerHTML = `
+                <div class="card" style="width: 450px;">
+                  <h4><strong>${element.id}- ${element.product}</strong></h4>
+                  <img src="${element.img}" class="card-img" alt="${element.product}">
+                     <div class="cards-text">
+                         <p>Su valor es de: <strong>${element.price}usd </strong></p>              
+                         <p> <strong>Con esta compra podrás: </strong></p>
+                         <p>${element.description}</p>
+                       <a href="#" class="btn btn-primary">Adquirir</a>
+                     </div>
+                </div>
+                `;
+                productListUL.appendChild(listItem2);
             });
 
-            productList.appendChild(h2);
             productList.appendChild(productListUL);
         })
         .catch((e) => {
             console.log("Hubo un error, vuelva a cargar la pagina")
         })
 
-    // Formulario hacerlo segun la clase de Eventos en 1h 31'
+}
 
-    const formUser = document.getElementById("form");
-    formUser.addEventListener("submit", valueForm);
+// Formulario de consultas
 
-    function valueForm(e) {
-        e.preventDefault();
-        const userChoice = parseInt(e.target.elements.choice.value);
-        const productChoice = products.find(e => e.id === userChoice);
+const formUser = document.getElementById("form");
+formUser.addEventListener("submit", valueForm);
 
-        const nameUser = e.target.elements.name.value;
-        const surnameUser = e.target.elements.surname.value;
-        const emailUser = e.target.elements.email.value;
+function valueForm(e) {
+    e.preventDefault();
 
-        const nameMessage = document.getElementById("nameMessage");
-        const surnameMessage = document.getElementById("surnameMessage");
-        const emailMessage = document.getElementById("emailMessage");
+    const userChoice = parseInt(e.target.elements.choice.value);
+    const productChoice = products.find(e => e.id === userChoice);
 
-        // Operador ternario para verificar los campos completados por el usuario
-        nameUser !== '' ? nameMessage.textContent = 'Nombre es válido' : nameMessage.textContent = 'Nombre esta vacío';
-        surnameUser !== '' ? surnameMessage.textContent = 'Apellido es válido' : surnameMessage.textContent = 'Apellido esta vacío';
-        emailUser !== '' ? emailMessage.textContent = 'Email es válido' : emailMessage.textContent = 'Email esta vacío';
+    const nameUser = e.target.elements.name.value;
+    const surnameUser = e.target.elements.surname.value;
+    const emailUser = e.target.elements.email.value;
 
-        addToCartAndSave(productChoice);
-    }
+    const h2 = document.getElementById("h2");
+
+    const nameMessage = document.getElementById("nameMessage");
+    const surnameMessage = document.getElementById("surnameMessage");
+    const emailMessage = document.getElementById("emailMessage");
+
+    // Operador ternario para verificar los campos completados por el usuario
+    nameUser !== '' ? nameMessage.textContent = 'Nombre es válido' : nameMessage.textContent = 'Nombre esta vacío';
+    surnameUser !== '' ? surnameMessage.textContent = 'Apellido es válido' : surnameMessage.textContent = 'Apellido esta vacío';
+    emailUser !== '' ? emailMessage.textContent = 'Email es válido' : emailMessage.textContent = 'Email esta vacío';
+
+    formUser.appendChild(h2)
+    addToCartAndSave(productChoice);
 }
 
 // Guardar en localStorage lo seleccionado por el usuario
@@ -194,7 +205,7 @@ seeProducts();
 async function comments() {
 
     try {
-        
+
         const contenedor = document.getElementById("commentsCard")
         commentsCard.className = 'comments-card';
 
@@ -230,7 +241,7 @@ async function comments() {
     } catch (e) {
         console.log('Error, vuelva a cargar la pagina', e);
     }
-}comments();
+} comments();
 
 const footerCopy = document.getElementById('footer');
 footerCopy.className = 'footer';
