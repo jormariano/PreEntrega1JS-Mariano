@@ -1,50 +1,4 @@
-// Barra de navegacion dinamica
-
-const navBar = [
-    {
-        label: 'Inicio',
-        src: './assets/home.svg',
-        url: './index.html'
-    },
-    {
-        label: 'Experiencia',
-        src: './assets/profile.svg',
-        url: './experiencia.html'
-    },
-    {
-        label: 'Productos',
-        src: './assets/eye.svg',
-    },
-    {
-        label: 'Carrito',
-        src: './assets/cart.svg',
-        url: './carrito.html'
-    }
-]
-
-const nav = document.getElementById('navBar');
-
-navBar.forEach((element) => {
-    const btnNav = document.createElement('button');
-    btnNav.textContent = element.label;
-    btnNav.className = 'btn';
-    const img = document.createElement('img');
-    img.src = element.src;
-    img.className = 'btn-icon';
-    btnNav.appendChild(img);
-
-    btnNav.addEventListener('click', () => {
-        if (element.url) {
-            window.location.href = element.url
-        } else {
-            console.log('Página en construcción') 
-        }
-    });
-
-    nav.appendChild(btnNav);
-});
-
-// Creacion de productos
+// Creacion de productos:
 
 const products = [
     {
@@ -73,8 +27,6 @@ const products = [
     }
 ]
 
-const shoppingCart = [];
-
 // Se solicitan los productos al backend y se simula una demora de 2 segundos
 
 const askProducts = () => {
@@ -88,38 +40,55 @@ const askProducts = () => {
 
 // Se muestran los productos al usuario y elige cual quiere
 
-function seeProducts() {
+const productList = document.getElementById("productList");
 
-    const productList = document.getElementById("productList");
+const shoppingCart = [];
 
-    const productListUL = document.createElement("ul");
+askProducts()
+    .then((products) => {
 
-    askProducts()
-        .then((products) => {
+        products.forEach((element) => {
+            const cardProducts = document.createElement("div");
+            cardProducts.className = "card-products"
 
-            products.forEach((element) => {
-                const listItem2 = document.createElement("li");
-                listItem2.innerHTML = `
-                <div class="card" style="width: 450px;">
-                  <h4><strong>${element.id}- ${element.product}</strong></h4>
-                  <img src="${element.img}" class="card-img" alt="${element.product}">
-                     <div class="cards-text">
-                         <p>Su valor es de: <strong>${element.price}usd </strong></p>              
-                         <p> <strong>Con esta compra podrás: </strong></p>
-                         <p>${element.description}</p>
-                       <a href="#" class="btn btn-primary">Adquirir</a>
-                     </div>
-                </div>
+            cardProducts.innerHTML = `
+                <h4><strong>${element.id}- ${element.product}</strong></h4>
+                <img src="${element.img}" alt="${element.product}">
+                <p class="card-price">Su valor es de: <strong>${element.price}usd </strong></p>              
+                <p> <strong>Con esta compra podrás: </strong></p>
+                <p>${element.description}</p>
                 `;
-                productListUL.appendChild(listItem2);
-            });
 
-            productList.appendChild(productListUL);
-        })
-        .catch((e) => {
-            console.log("Hubo un error, vuelva a cargar la pagina")
-        })
+            productList.appendChild(cardProducts);
 
+            const cardButton = document.createElement("button");
+            cardButton.className = "card-button"
+            cardButton.innerText = "Adquirir"
+
+            cardProducts.appendChild(cardButton);
+
+            cardButton.addEventListener("click", () => {
+                shoppingCart.push({
+                    id: element.id,
+                    product: element.product,
+                    img: element.img,
+                    price: element.price
+                })
+                console.log(shoppingCart) // Youtube 24'
+            })
+
+        })
+            .catch((e) => {
+                console.log("Hubo un error, vuelva a cargar la pagina")
+            })
+    })
+
+// Guardar en localStorage lo seleccionado por el usuario
+
+function addToFormAndSave(productChoice) {
+    shoppingCart.push(productChoice);
+    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+    askToKeepBuying(productChoice);
 }
 
 // Formulario de consultas
@@ -149,56 +118,8 @@ function valueForm(e) {
     emailUser !== '' ? emailMessage.textContent = 'Email es válido' : emailMessage.textContent = 'Email esta vacío';
 
     formUser.appendChild(h2)
-    addToCartAndSave(productChoice);
+    addToFormAndSave(productChoice);
 }
-
-// Guardar en localStorage lo seleccionado por el usuario
-
-function addToCartAndSave(productChoice) {
-    shoppingCart.push(productChoice);
-    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-    askToKeepBuying(productChoice);
-}
-
-// El usuario puede elegir seguir comprando o no
-
-function askToKeepBuying(productChoice, productList) {
-    const keepBuyingDiv = document.getElementById("keep-buying");
-    keepBuyingDiv.style.display = "block";
-
-    const keepBuyingYesButton = document.getElementById("keep-buying-yes");
-    const keepBuyingNoButton = document.getElementById("keep-buying-no");
-
-    keepBuyingYesButton.onclick = () => {
-        keepBuyingDiv.style.display = "none";
-        seeProducts()
-    };
-
-    keepBuyingNoButton.onclick = () => {
-        keepBuyingDiv.style.display = "none";
-        const thanks = document.getElementById("thanks");
-
-        thanks.innerHTML = `
-            <h3>¡Muchas gracias por tu compra!</h3>
-            <p>Tu producto elegido es: ${productChoice.product}</p>
-            <button id="boton">Ver detalles</button>
-        `;
-
-        const btn = document.getElementById('boton');
-        btn.onclick = () => {
-            const detailsDiv = document.createElement("div");
-            detailsDiv.innerHTML = `
-                <h4>Detalles del producto:</h4>
-                <p>ID: ${productChoice.id}</p>
-                <p>Precio: ${productChoice.price} usd</p>
-                <p>${productChoice.descriptionSale}</p>
-            `;
-            document.body.append(detailsDiv);
-        };
-    };
-}
-
-seeProducts();
 
 // Comentarios de clientes:
 
@@ -231,7 +152,7 @@ async function comments() {
             const innerDiv = document.createElement('div');
             innerDiv.className = 'card-body';
 
-            innerDiv.innerHTML = `<h4>${parsedCustomerFeedback.name}</h4>
+            innerDiv.innerHTML = `<h4><strong>${parsedCustomerFeedback.name}</strong></h4>
                                   <p>Comentario: ${parsedCustomerFeedback.body} </p>`
 
 
