@@ -90,12 +90,91 @@ header h1 {
     opacity: 0.7;
 }
 
+/* Contenido del Carrito */
+
+.modal-container {
+    width: 80%;
+    margin: 0 10%;
+    max-height: 80vh;
+    color: #131111c8;
+    background-color: #c676da;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    overflow: auto;
+    z-index: 9;
+    top: 14vh;
+    scrollbar-color: none;
+}
+
+.modal-container::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #c676da;
+    color: #131111c8;
+    width: 100%;
+}
+
+.modal-header-tittle {
+    justify-self: start;
+    font-weight: bold;
+}
+
+.modal-button {
+    cursor: pointer;
+}
+
+.cart-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    margin: 10px;
+}
+
+.cart-content p {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.modal-container div img {
+    height: 150px;
+    width: 220px;
+}
+
+.total-buying {
+    font-size: 25px;
+    padding: 20px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.total-buying h3 {
+    font-weight: bold;
+}
+
+/* Form + Comments */
+
+.below-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 /* Formulario de consultas */
 
 .form {
-    max-width: 800px;
+    height: 450px;
+    width: 450px;
     margin: 5px;
-    padding: 5px;
+    padding: 15px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -115,6 +194,12 @@ header h1 {
 .form label {
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 
 .form button {
@@ -140,18 +225,18 @@ header h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .card {
     display: flex;
     flex-direction: row;
-    width: 1200px;
+    width: 900px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     text-transform: capitalize;
-    margin: 10px 10px;
+    margin: 5px 5px;
     border: 2px solid grey;
     box-shadow: -1px 6px 24px 2px rgba(0, 0, 0, 0.75);
     border-radius: 5px;
@@ -160,14 +245,13 @@ header h1 {
 .card-body {
     display: flex;
     flex-direction: row;
-    height: 260px;
-    width: 300px;
+    height: 180px;
+    width: 220px;
     margin: 10px;
     border: 2px solid black;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-
 }
 
 .card-body h4 {

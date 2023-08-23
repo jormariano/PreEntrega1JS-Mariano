@@ -23,6 +23,7 @@ const navBar = [
 ]
 
 const nav = document.getElementById('navBar');
+const modalContainer = document.getElementById('modalContainer');
 
 navBar.forEach((element) => {
     const btnNav = document.createElement('button');
@@ -33,13 +34,62 @@ navBar.forEach((element) => {
     img.className = 'btn-icon';
     btnNav.appendChild(img);
 
-    btnNav.addEventListener('click', () => {
-        if (element.url) {
-            window.location.href = element.url
-        } else {
-            console.log('Página en construcción')
-        }
-    });
+    // youtube, parte 2 a los 3'. Hay que separar este carrito
+    if (element.label === 'Carrito') {
+        btnNav.addEventListener('click', () => {
+            modalContainer.innerHTML = "";
+            modalContainer.style.display = "flex";
+    
+            const modalHeader = document.createElement('div')
+            modalHeader.className = "modal-header"
+
+            modalHeader.innerHTML = `
+            <h1 class = "modal-header-tittle">Carrito</h1>
+            `
+            modalContainer.appendChild(modalHeader);
+
+            const modalButton = document.createElement('h2');
+            modalButton.className = "modal-button"
+            modalButton.innerText = "X"
+
+            modalButton.addEventListener("click", () => {
+                modalContainer.style.display = "none";
+            })
+
+            modalHeader.appendChild(modalButton);
+
+            shoppingCart.forEach((products) => {
+                const cartContent = document.createElement('div');
+                cartContent.className = "cart-content"
+    
+                cartContent.innerHTML = `
+                <h3>${products.product}</h3>
+                <img src="${products.img}">
+                <p>Precio: ${products.price} usd.</p>
+                `
+                modalContainer.appendChild(cartContent);
+            });
+
+            const total = shoppingCart.reduce((acc, el) => acc + el.price, 0);
+
+            const totalBuying = document.createElement('div');
+            totalBuying.className = "total-buying";
+
+            totalBuying.innerHTML = `
+            <h3>Total a pagar: ${total} usd.</h3>
+            `
+
+            modalContainer.appendChild(totalBuying);
+        });
+    } else {
+        btnNav.addEventListener('click', () => {
+            if (element.url) {
+                window.location.href = element.url;
+            } else {
+                console.log('Página en construcción');
+            }
+        });
+    }
 
     nav.appendChild(btnNav);
 });

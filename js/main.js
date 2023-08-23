@@ -6,24 +6,21 @@ const products = [
         product: "Ecommerce",
         price: 500,
         img: './assets/Ecommerce.png',
-        description: "Adquirir un Ecommerce para vender tus productos de forma online e impulsar tu negocio",
-        descriptionSale: "¡Felicitaciones! Accediste a Ecommerce para vender tus productos online e impulsar tu negocio"
+        description: "Adquirir un Ecommerce para vender tus productos de forma online e impulsar tu negocio"
     },
     {
         id: 2,
         product: "Página Web Personal",
         price: 300,
         img: './assets/PaginaWebPersonal.png',
-        description: "Adquirir tu Página web personalizada para posicionar tu marca personal en internet y redes sociales",
-        descriptionSale: "¡Felicitaciones! Accediste a Página Web Personal para posicionar tu marca personal"
+        description: "Adquirir tu Página web personalizada para posicionar tu marca personal en internet y redes sociales"
     },
     {
         id: 3,
         product: "Página Web Estudio",
         price: 400,
         img: './assets/PaginaWebEstudio.png',
-        description: "Adquirir tu Página web personalizada para tu estudio y así lograras que más clientes te encuentren",
-        descriptionSale: "¡Felicitaciones! Accediste a Página Web Estudio para lograr que más clientes te encuentren"
+        description: "Adquirir tu Página web personalizada para tu estudio y así lograras que más clientes te encuentren"
     }
 ]
 
@@ -68,27 +65,32 @@ askProducts()
             cardProducts.appendChild(cardButton);
 
             cardButton.addEventListener("click", () => {
-                shoppingCart.push({
+                Toastify({
+                    text: "Añadiste un producto al carrito",
+                    duration: 3000,
+                }).showToast();
+
+                const productChoice = {
                     id: element.id,
                     product: element.product,
                     img: element.img,
                     price: element.price
-                })
-                console.log(shoppingCart) // Youtube 24'
+                };
+                addToFormAndSave(productChoice);
             })
-
         })
-            .catch((e) => {
-                console.log("Hubo un error, vuelva a cargar la pagina")
-            })
     })
+    .catch((error) => {
+        const errorProducts = "Hubo un error al obtener los productos:";
+        const errorContainerP = document.getElementById("errorContainerP");
+        errorContainerP.textContent = errorProducts;
+    });
 
 // Guardar en localStorage lo seleccionado por el usuario
 
 function addToFormAndSave(productChoice) {
     shoppingCart.push(productChoice);
     localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-    askToKeepBuying(productChoice);
 }
 
 // Formulario de consultas
@@ -126,16 +128,15 @@ function valueForm(e) {
 async function comments() {
 
     try {
-
-        const contenedor = document.getElementById("commentsCard")
+        const commentsCard = document.getElementById("commentsCard")
         commentsCard.className = 'comments-card';
 
         const tittle = document.createElement('h3');
         tittle.className = 'card-tittle';
 
-        tittle.innerHTML = `<h3>Comentarios de clientes: </h3>`
+        tittle.textContent = "Comentarios de clientes:"
 
-        contenedor.appendChild(tittle);
+        commentsCard.appendChild(tittle);
 
         const div = document.createElement('div');
         div.className = 'card';
@@ -158,9 +159,11 @@ async function comments() {
 
             div.appendChild(innerDiv);
         }
-        contenedor.appendChild(div);
-    } catch (e) {
-        console.log('Error, vuelva a cargar la pagina', e);
+        commentsCard.appendChild(div);
+    } catch (error) {
+        const errorComments = "Error al cargar los comentarios. Por favor, vuelve a cargar la página."
+        const errorContainer = document.getElementById("errorContainer");
+        errorContainer.textContent = errorComments;
     }
 } comments();
 
@@ -168,8 +171,3 @@ const footerCopy = document.getElementById('footer');
 footerCopy.className = 'footer';
 
 footerCopy.innerHTML = `<p>© 2023 JotaMariano</p>`
-
-
-// Simular carrito de compra hasta que el usuario ingrese datos de su tarjeta de credito
-// Clase Librerias: Toastify 1h 12' (agregar para notificar que anadio un producto al carrito)
-// Agregar Readme

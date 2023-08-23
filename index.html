@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <title>Pagina Web</title>
 </head>
@@ -15,42 +16,51 @@
         <nav id="navBar"></nav>
         <h1>Accede a la Página Web que necesites</h1>
     </header>
-    
+
     <main>
+
         <!-- Productos disponibles -->
 
         <div id="productList" class="product-list"></div>
+        <div id="errorContainerP" class="error-container-p"></div>
 
-        <!-- Formulario de consultas -->
+        <!-- Contenedor de Carrito -->
 
-        <form id="form" class="form">
-            <p id="h2" class="h2-form">Formulario para consultas</p>
-            <label for="name">Nombre:</label>
-            <input id="name" name="name" type="text" />
-            <p id="nameMessage"></p>
-            <label for="surname">Apellido:</label>
-            <input id="surname" name="surname" type="text" />
-            <p id="surnameMessage"></p>
-            <label for="email">Email:</label>
-            <input id="email" name="email" type="email" />
-            <p id="emailMessage"></p>
-            <div class="dropdown">
-                <label for="choice">Selecciona la página</label>
-                <select type="number" id="choice" name="choice" class="choice">
-                    <option value="">Selecciona</option>
-                    <option value="">Ecommerce</option>
-                    <option value="">Pagina Web Estudio</option>
-                    <option value="">Pagina Web Personal</option>
-                </select>
-            </div>
-            <label for="comentarios">Consulta:</label>
-            <textarea name="" id="" cols="60" rows="5"></textarea>
-            <button type="submit" value="comprar">Enviar consulta</button>
-        </form>
+        <div id="modalContainer" class="modal-container"></div>
 
-        <!-- Comentarios de clientes -->
+        <div class="below-form">
+            
+            <!-- Formulario de consultas -->
+            <form id="form" class="form">
+                <p id="h2" class="h2-form">Formulario para consultas</p>
+                <label for="name">Nombre:</label>
+                <input id="name" name="name" type="text" />
+                <p id="nameMessage"></p>
+                <label for="surname">Apellido:</label>
+                <input id="surname" name="surname" type="text" />
+                <p id="surnameMessage"></p>
+                <label for="email">Email:</label>
+                <input id="email" name="email" type="email" />
+                <p id="emailMessage"></p>
+                <div class="dropdown">
+                    <label for="choice">Selecciona la página por la que quieres consultar: </label>
+                    <select type="number" id="choice" name="choice" class="choice">
+                        <option value="">Selecciona</option>
+                        <option value="ecommerce">Ecommerce</option>
+                        <option value="studio-website">Pagina Web Estudio</option>
+                        <option value="personal-website">Pagina Web Personal</option>
+                    </select>
+                </div>
+                <label for="comentarios">Consulta:</label>
+                <textarea name="comentarios" id="comentarios" cols="60" rows="5"></textarea>
+                <button type="submit" value="comprar">Enviar consulta</button>
+            </form>
 
-        <div id="commentsCard"></div>
+            <!-- Comentarios de clientes -->
+            <div id="commentsCard"></div>
+            <div id="errorContainer" class="error-container"></div>
+
+        </div>
 
         <!-- Footer -->
 
@@ -59,9 +69,11 @@
 
     <script src="/js/navBar.js"></script>
     <script src="/js/main.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>
