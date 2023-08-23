@@ -3,22 +3,22 @@
 const navBar = [
     {
         label: 'Inicio',
-        src: '../assets/home.svg',
-        url: '../index.html'
+        src: './assets/home.svg',
+        url: './index.html'
     },
     {
         label: 'Experiencia',
-        src: '../assets/profile.svg',
-        url: '../html/experiencia.html'
+        src: './assets/profile.svg',
+        url: './html/experiencia.html'
     },
     {
         label: 'Productos',
-        src: '../assets/eye.svg',
-        url: '../html/productos.html'
+        src: './assets/eye.svg',
+        url: './html/productos.html'
     },
     {
         label: 'Carrito',
-        src: '../assets/cart.svg',
+        src: './assets/cart.svg',
     }
 ]
 

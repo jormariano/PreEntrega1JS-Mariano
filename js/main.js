@@ -67,7 +67,7 @@ askProducts()
             cardButton.addEventListener("click", () => {
                 Toastify({
                     text: "Añadiste un producto al carrito",
-                    duration: 3000,
+                    duration: 2000,
                 }).showToast();
 
                 const productChoice = {
@@ -108,18 +108,14 @@ function valueForm(e) {
     const surnameUser = e.target.elements.surname.value;
     const emailUser = e.target.elements.email.value;
 
-    const h2 = document.getElementById("h2");
+    const nameInput = document.getElementById("name");
+    const surnameInput = document.getElementById("surname");
+    const emailInput = document.getElementById("email");
 
-    const nameMessage = document.getElementById("nameMessage");
-    const surnameMessage = document.getElementById("surnameMessage");
-    const emailMessage = document.getElementById("emailMessage");
+    nameInput.placeholder = nameUser !== '' ? '' : 'Nombre está vacío';
+    surnameInput.placeholder = surnameUser !== '' ? '' : 'Apellido está vacío';
+    emailInput.placeholder = emailUser !== '' ? '' : 'Email está vacío';
 
-    // Operador ternario para verificar los campos completados por el usuario
-    nameUser !== '' ? nameMessage.textContent = 'Nombre es válido' : nameMessage.textContent = 'Nombre esta vacío';
-    surnameUser !== '' ? surnameMessage.textContent = 'Apellido es válido' : surnameMessage.textContent = 'Apellido esta vacío';
-    emailUser !== '' ? emailMessage.textContent = 'Email es válido' : emailMessage.textContent = 'Email esta vacío';
-
-    formUser.appendChild(h2)
     addToFormAndSave(productChoice);
 }
 

@@ -29,19 +29,22 @@
         <div id="modalContainer" class="modal-container"></div>
 
         <div class="below-form">
-            
+
             <!-- Formulario de consultas -->
             <form id="form" class="form">
-                <p id="h2" class="h2-form">Formulario para consultas</p>
-                <label for="name">Nombre:</label>
-                <input id="name" name="name" type="text" />
-                <p id="nameMessage"></p>
-                <label for="surname">Apellido:</label>
-                <input id="surname" name="surname" type="text" />
-                <p id="surnameMessage"></p>
-                <label for="email">Email:</label>
-                <input id="email" name="email" type="email" />
-                <p id="emailMessage"></p>
+                <p class="h2-form">Formulario para consultas</p>
+                <div class="input-group">
+                    <label for="name">Nombre:</label>
+                    <input id="name" name="name" type="text" />
+                </div>
+                <div class="input-group">
+                    <label for="surname">Apellido:</label>
+                    <input id="surname" name="surname" type="text" />
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input id="email" name="email" type="email" />
+                </div>
                 <div class="dropdown">
                     <label for="choice">Selecciona la página por la que quieres consultar: </label>
                     <select type="number" id="choice" name="choice" class="choice">
@@ -67,8 +70,10 @@
         <footer id="footer"></footer>
     </main>
 
-    <script src="/js/navBar.js"></script>
+    <script src="/js/productos.js"></script>
+    <script src="/js/experiencia.js"></script>
     <script src="/js/main.js"></script>
+    <script src="navBarIndex.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
