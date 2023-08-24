@@ -159,11 +159,8 @@ async function comments() {
     } catch (error) {
         const errorComments = "Error al cargar los comentarios. Por favor, vuelve a cargar la página."
         const errorContainer = document.getElementById("errorContainer");
-        errorContainer.textContent = errorComments;
+        if (errorContainer) {
+            errorContainer.textContent = errorComments;
+        }
     }
 } comments();
-
-const footerCopy = document.getElementById('footer');
-footerCopy.className = 'footer';
-
-footerCopy.innerHTML = `<p>© 2023 JotaMariano</p>`
